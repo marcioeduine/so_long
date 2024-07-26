@@ -1,0 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss_verifying_the_elements_in_the_map.c             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:56:53 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:56:56 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+void	ss_verifying_the_elements_in_the_map(char *map)
+{
+	ss_searching_player_duplication_in_the_map(map);
+	ss_searching_exit_duplication_in_the_map(map);
+	ss_verifying_the_existence_of_collectable_in_the_map(map);
+}

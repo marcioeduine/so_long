@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss_duplicating_map.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:56:10 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:56:13 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+char	**ss_duplicating_map(char **map, int rows, int i)
+{
+	int		j;
+	char	**new_map;
+
+	new_map = (char **)malloc(rows * sizeof(char *));
+	if (!new_map)
+		return (NULL);
+	i = -1;
+	while (++i < rows)
+	{
+		new_map[i] = ft_strdup(map[i]);
+		if (!new_map[i])
+		{
+			j = -1;
+			while (++j < i)
+				free(new_map[j]);
+			free(new_map);
+			return (NULL);
+		}
+	}
+	return (new_map);
+}

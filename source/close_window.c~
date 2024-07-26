@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   close_window.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:55:22 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:55:25 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+int	close_window(void *ptr)
+{
+	//t_game	game_data;
+
+	(void)ptr;
+	/*mlx_destroy_image(&game_data.root, &game_data.img_player1);
+	mlx_destroy_image(&game_data.root, &game_data.img_player2);
+	mlx_destroy_image(&game_data.root, &game_data.img_collectable);
+	mlx_destroy_image(&game_data.root, &game_data.img_background);
+	mlx_destroy_image(&game_data.root, &game_data.img_wall);
+	mlx_destroy_image(&game_data.root, &game_data.img_exit);*/
+	exit(0);
+	return (0);
+}

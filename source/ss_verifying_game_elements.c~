@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss_verifying_game_elements.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:59:48 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:59:50 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+void	ss_verifying_player_direction(t_game *game_data, int i, int j)
+{
+	if (game_data->dir == 1)
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_player1, j * game_data->img_width,
+			i * game_data->img_height);
+	else
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_player2, j * game_data->img_width,
+			i * game_data->img_height);
+}
+
+void	ss_verifying_game_elements(t_game *game_data, int i, int j)
+{
+	if (game_data->map[i][j] == '1')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_wall, j * game_data->img_width,
+			i * game_data->img_height);
+	else if (game_data->map[i][j] == '0')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_background, j * game_data->img_width,
+			i * game_data->img_height);
+	else if (game_data->map[i][j] == 'P')
+		ss_verifying_player_direction(game_data);
+	else if (game_data->map[i][j] == 'E')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_exit, j * game_data->img_width,
+			i * game_data->img_height);
+	else if (game_data->map[i][j] == 'C')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->img_collectable, j * game_data->img_width,
+			i * game_data->img_height);
+}

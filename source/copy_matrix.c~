@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:56:10 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:56:13 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+char	**copy_map(char **map, int rows, int i)
+{
+	int		j;
+	char	**map_copy;
+
+	map_copy = (char **)malloc(rows * sizeof(char *));
+	if (!map_copy)
+		return (NULL);
+	i = -1;
+	while (++i < rows)
+	{
+		map_copy[i] = ft_strdup(map[i]);
+		if (!map_copy[i])
+		{
+			j = -1;
+			while (++j < i)
+				free(map_copy[j]);
+			free(map_copy);
+			return (NULL);
+		}
+	}
+	return (map_copy);
+}

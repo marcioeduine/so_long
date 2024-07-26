@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_horizontal.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:59:08 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:59:11 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+void	move_horizontal(t_game *game_data, int move)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (game_data->map[++i])
+	{
+		j = -1;
+		while (game_data->map[i][++j])
+		{
+			if (game_data->map[i][j] == 'P'
+				&& game_data->map[i][j + move] != '1')
+			{
+				if (game_data->map[i][j + move] != 'E')
+				{
+					game_data->map[i][j] = '0';
+					game_data->map[i][j + move] = 'P';
+					ft_putstr_fd("Steps: ", 1);
+					ft_putnbr_fd(game_data->step++, 1);
+					ft_putchar_fd('\n', 1);
+					return ;
+				}
+				else if ((ss_searching_collectable_in_the_map(game_data) == 0)
+					&& game_data->map[i][j + move] == 'E')
+					ss_exit_game("YOU WIN!\n");
+			}
+		}
+	}
+}

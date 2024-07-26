@@ -1,0 +1,100 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:59:16 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:59:18 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+void	ss_game_result(t_game *game_data)
+{
+	ss_step_counter(game_data);
+	ss_exit_game("YOU WIN!\n");
+}
+
+void	move_horizontal(t_game *game_data, int move)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (game_data->map[++i])
+	{
+		j = -1;
+		while (game_data->map[i][++j])
+		{
+			if (game_data->map[i][j] == 'P'
+				&& game_data->map[i][j + move] != '1')
+			{
+				if (game_data->map[i][j + move] != 'E')
+				{
+					game_data->map[i][j] = '0';
+					game_data->map[i][j + move] = 'P';
+					ss_step_counter(game_data);
+					return ;
+				}
+				else if ((ss_searching_collectable_in_the_map(game_data) == 0)
+					&& game_data->map[i][j + move] == 'E')
+					ss_game_result(game_data);
+			}
+		}
+	}
+}
+
+void	move_vertical(t_game *game_data, int move)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (game_data->map[++i])
+	{
+		j = -1;
+		while (game_data->map[i][++j])
+		{
+			if (game_data->map[i][j] == 'P' &&
+					game_data->map[i + move][j] != '1')
+			{
+				if (game_data->map[i + move][j] != 'E')
+				{
+					game_data->map[i][j] = '0';
+					game_data->map[i + move][j] = 'P';
+					ss_step_counter(game_data);
+					return ;
+				}
+				else if ((ss_searching_collectable_in_the_map(game_data) == 0)
+					&& game_data->map[i + move][j] == 'E')
+					ss_game_result(game_data);
+			}
+		}
+	}
+}
+
+int	move_player(int key, t_game *game_data)
+{
+	(void)game_data;
+	if (key == ESC)
+		close_window(NULL);
+	if (key == RIGHT || key == KEY_D)
+	{
+		game_data->dir = 1;
+		move_horizontal(game_data, 1);
+	}
+	else if (key == UP || key == KEY_W)
+		move_vertical(game_data, -1);
+	else if (key == LEFT || key == KEY_A)
+	{
+		game_data->dir = -1;
+		move_horizontal(game_data, -1);
+	}
+	else if (key == DOWN || key == KEY_S)
+		move_vertical(game_data, 1);
+	ss_loading_elements_images(game_data);
+	return (0);
+}

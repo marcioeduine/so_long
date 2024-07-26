@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_and_validate_map.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:56:32 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:56:39 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+int	count_and_validate_map(char **map, int *lines, int *columns)
+{
+	int	i;
+	int	curr_columns;
+
+	*lines = 0;
+	*columns = 0;
+	if (!map)
+		return (-1);
+	while (map[*lines])
+	{
+		curr_columns = 0;
+		i = -1;
+		while (map[*lines][++i])
+			curr_columns++;
+		if (*lines == 0)
+			*columns = curr_columns;
+		else if (curr_columns != *columns)
+			return (-1);
+		(*lines)++;
+	}
+	return (0);
+}

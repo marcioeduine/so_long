@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss_verifying_game_elements.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaquart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 13:59:48 by mcaquart          #+#    #+#             */
+/*   Updated: 2024/07/24 13:59:50 by mcaquart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/so_long.h"
+
+void	ss_verifying_game_elements(t_game *game_data, int i, int j)
+{
+	if (game_data->map[i][j] == '1')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->wall, j * game_data->ligax, i * game_data->ligax);
+	else if (game_data->map[i][j] == '0')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->background, j * game_data->ligax, i * game_data->ligax);
+	else if (game_data->map[i][j] == 'P')
+	{
+		if (game_data->dir == 1)
+			mlx_put_image_to_window(game_data->root, game_data->window,
+				game_data->player, j * game_data->ligax,
+				i * game_data->ligax);
+		else
+			mlx_put_image_to_window(game_data->root, game_data->window,
+				game_data->player2, j * game_data->ligax,
+				i * game_data->ligax);
+	}
+	else if (game_data->map[i][j] == 'E')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->exit, j * game_data->ligax, i * game_data->ligax);
+	else if (game_data->map[i][j] == 'C')
+		mlx_put_image_to_window(game_data->root, game_data->window,
+			game_data->collect, 10 + j * game_data->ligax,
+			10 + i * game_data->ligax);
+}
